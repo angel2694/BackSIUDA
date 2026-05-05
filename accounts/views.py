@@ -1,11 +1,17 @@
 from rest_framework import status
-
-from .serializers import CustomTokenObtainPairSerializer, LoginSerializer
+from rest_framework.permissions import BasePermission, IsAuthenticated
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import IsAuthenticated
+
+from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer
+from .models import CustomUser
+
+
+class IsAdmin(BasePermission):
+    def has_permission(self, request, view):
+        return bool(request.user and request.user.is_authenticated and request.user.role == 'admin')
 
 # Create your views here.
 class LoginAPIView(APIView):
@@ -32,6 +38,25 @@ class LoginAPIView(APIView):
             'refresh': str(refresh),
             'access': str(refresh.access_token)
         })
+
+class AssignRoleAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsAdmin]
+
+    def patch(self, request, id):
+        try:
+            user = CustomUser.objects.get(id=id)
+        except CustomUser.DoesNotExist:
+            return Response({'detail': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = AssignRoleSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        user.role = serializer.validated_data['role']
+        user.save()
+
+        return Response({'detail': f'Rol actualizado a {user.role}', 'user_id': user.id, 'role': user.role})
+
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

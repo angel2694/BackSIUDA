@@ -16,6 +16,12 @@ class LoginSerializer(serializers.Serializer):
  
         raise serializers.ValidationError("Credenciales inválidas")
     
+class AssignRoleSerializer(serializers.Serializer):
+    role = serializers.ChoiceField(choices=[
+        'admin', 'user', 'guest', 'almacen', 'inventario', 'cliente', 'proveedor'
+    ])
+
+
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
