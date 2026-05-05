@@ -11,7 +11,7 @@ class CustomUser(AbstractUser):
         ('cliente', 'Cliente'),
         ('proveedor', 'Proveedor'),
     )
-    role = models.CharField(max_length=10, choices=ROLE_CHOICES)
+    role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='user')
     def __str__(self):
         return self.username
 

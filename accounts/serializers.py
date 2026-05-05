@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
+from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -14,4 +15,14 @@ class LoginSerializer(serializers.Serializer):
             return data
  
         raise serializers.ValidationError("Credenciales inválidas")
+    
+class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
+    @classmethod
+    def get_token(cls, user):
+        token = super().get_token(user)
+
+        # Agregar información personalizada al token
+        token['role'] = user.role
+
+        return token
     
