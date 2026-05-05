@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
 
-from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer
+from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer
 from .models import CustomUser
 
 
@@ -56,6 +56,15 @@ class AssignRoleAPIView(APIView):
         user.save()
 
         return Response({'detail': f'Rol actualizado a {user.role}', 'user_id': user.id, 'role': user.role})
+
+
+class UserListAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsAdmin]
+
+    def get(self, request):
+        users = CustomUser.objects.all().order_by('id')
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
 
 
 @api_view(['GET'])

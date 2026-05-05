@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
+from .models import CustomUser
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -20,6 +21,12 @@ class AssignRoleSerializer(serializers.Serializer):
     role = serializers.ChoiceField(choices=[
         'admin', 'user', 'guest', 'almacen', 'inventario', 'cliente', 'proveedor'
     ])
+
+
+class UserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'email', 'role', 'is_active']
 
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
