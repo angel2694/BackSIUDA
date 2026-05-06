@@ -1,3 +1,35 @@
 from django.db import models
 
-# Create your models here.
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+class UnitMeasure(models.Model):
+    name = models.CharField(max_length=50)
+    abbreviation = models.CharField(max_length=10)
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
+    
+class Product(models.Model):
+    code = models.CharField(max_length=20, unique=True)
+    name = models.CharField(max_length=100)
+    description = models.TextField(blank=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE)
+    unit_measure = models.ForeignKey(UnitMeasure, on_delete=models.CASCADE)
+    min_stock = models.IntegerField()
+    is_active = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+
+    def __str__(self):
+        return self.name
