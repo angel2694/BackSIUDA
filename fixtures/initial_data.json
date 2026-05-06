@@ -1,0 +1,40 @@
+[
+  {"model": "areas.area", "pk": 1, "fields": {"name": "Administración", "description": "Área administrativa general", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "areas.area", "pk": 2, "fields": {"name": "Logística", "description": "Área de logística y almacén", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "areas.area", "pk": 3, "fields": {"name": "Contabilidad", "description": "Área contable y finanzas", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "areas.area", "pk": 4, "fields": {"name": "Sistemas", "description": "Área de tecnología e informática", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "areas.area", "pk": 5, "fields": {"name": "Recursos Humanos", "description": "Gestión de personal", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+
+  {"model": "productos.category", "pk": 1, "fields": {"name": "Útiles de oficina", "description": "Materiales de escritorio y oficina", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.category", "pk": 2, "fields": {"name": "Limpieza", "description": "Productos de limpieza e higiene", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.category", "pk": 3, "fields": {"name": "Cómputo", "description": "Accesorios y equipos de cómputo", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.category", "pk": 4, "fields": {"name": "Mobiliario", "description": "Muebles y enseres de oficina", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+
+  {"model": "productos.unitmeasure", "pk": 1, "fields": {"name": "Unidad", "abbreviation": "und", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.unitmeasure", "pk": 2, "fields": {"name": "Caja", "abbreviation": "cja", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.unitmeasure", "pk": 3, "fields": {"name": "Resma", "abbreviation": "rsm", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.unitmeasure", "pk": 4, "fields": {"name": "Litro", "abbreviation": "L", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.unitmeasure", "pk": 5, "fields": {"name": "Millar", "abbreviation": "mill", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+
+  {"model": "productos.product", "pk": 1, "fields": {"code": "PROD-001", "name": "Papel A4", "description": "Papel bond A4 75gr", "category": 1, "unit_measure": 3, "min_stock": 10, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.product", "pk": 2, "fields": {"code": "PROD-002", "name": "Lapicero azul", "description": "Lapicero tinta azul punta fina", "category": 1, "unit_measure": 2, "min_stock": 5, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.product", "pk": 3, "fields": {"code": "PROD-003", "name": "Tóner HP LaserJet", "description": "Tóner negro compatible HP", "category": 3, "unit_measure": 1, "min_stock": 2, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.product", "pk": 4, "fields": {"code": "PROD-004", "name": "Lejía", "description": "Lejía desinfectante 1L", "category": 2, "unit_measure": 4, "min_stock": 5, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.product", "pk": 5, "fields": {"code": "PROD-005", "name": "Folder manila", "description": "Folder manila A4", "category": 1, "unit_measure": 5, "min_stock": 3, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.product", "pk": 6, "fields": {"code": "PROD-006", "name": "USB 32GB", "description": "Memoria USB 32GB", "category": 3, "unit_measure": 1, "min_stock": 3, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.product", "pk": 7, "fields": {"code": "PROD-007", "name": "Detergente", "description": "Detergente en polvo 1kg", "category": 2, "unit_measure": 1, "min_stock": 4, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "productos.product", "pk": 8, "fields": {"code": "PROD-008", "name": "Archivador", "description": "Archivador lomo ancho", "category": 1, "unit_measure": 1, "min_stock": 5, "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+
+  {"model": "proveedores.supplier", "pk": 1, "fields": {"ruc": "20100070970", "name": "Tai Loy S.A.", "contact_name": "Carlos Quispe", "phone": "01-3456789", "email": "ventas@tailoy.com.pe", "address": "Av. Argentina 2450, Lima", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "proveedores.supplier", "pk": 2, "fields": {"ruc": "20601233488", "name": "Suministros Tech SAC", "contact_name": "María López", "phone": "01-7654321", "email": "contacto@suministrostech.pe", "address": "Jr. Lampa 123, Lima", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "proveedores.supplier", "pk": 3, "fields": {"ruc": "20512345678", "name": "Limpieza Total EIRL", "contact_name": "José Ramírez", "phone": "01-9876543", "email": "ventas@limpiezatotal.pe", "address": "Av. Colonial 567, Lima", "is_active": true, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+
+  {"model": "inventario.stock", "pk": 1, "fields": {"product": 1, "quantity": 82, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "inventario.stock", "pk": 2, "fields": {"product": 2, "quantity": 22, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "inventario.stock", "pk": 3, "fields": {"product": 3, "quantity": 2, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "inventario.stock", "pk": 4, "fields": {"product": 4, "quantity": 15, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "inventario.stock", "pk": 5, "fields": {"product": 5, "quantity": 8, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "inventario.stock", "pk": 6, "fields": {"product": 6, "quantity": 5, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "inventario.stock", "pk": 7, "fields": {"product": 7, "quantity": 10, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}},
+  {"model": "inventario.stock", "pk": 8, "fields": {"product": 8, "quantity": 12, "created": "2026-01-01T00:00:00Z", "updated": "2026-01-01T00:00:00Z"}}
+]
