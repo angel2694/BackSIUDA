@@ -1,0 +1,52 @@
+[
+  {"model": "solicitudes.request", "pk": 1, "fields": {"code": "SOL-2026-001", "area": 1, "user": 2, "status": "ATTENDED", "notes": "Solicitud urgente de materiales de oficina", "created": "2026-01-10T08:00:00Z", "updated": "2026-01-10T08:00:00Z"}},
+  {"model": "solicitudes.request", "pk": 2, "fields": {"code": "SOL-2026-002", "area": 2, "user": 3, "status": "APPROVED", "notes": "Materiales de limpieza para almacén", "created": "2026-01-15T09:00:00Z", "updated": "2026-01-15T09:00:00Z"}},
+  {"model": "solicitudes.request", "pk": 3, "fields": {"code": "SOL-2026-003", "area": 3, "user": 4, "status": "PENDING", "notes": "Equipos de cómputo para contabilidad", "created": "2026-02-01T10:00:00Z", "updated": "2026-02-01T10:00:00Z"}},
+  {"model": "solicitudes.request", "pk": 4, "fields": {"code": "SOL-2026-004", "area": 4, "user": 2, "status": "REJECTED", "notes": "Stock insuficiente", "created": "2026-02-10T11:00:00Z", "updated": "2026-02-10T11:00:00Z"}},
+  {"model": "solicitudes.request", "pk": 5, "fields": {"code": "SOL-2026-005", "area": 5, "user": 3, "status": "PENDING", "notes": "", "created": "2026-03-01T08:00:00Z", "updated": "2026-03-01T08:00:00Z"}},
+
+  {"model": "solicitudes.requestdetail", "pk": 1, "fields": {"request": 1, "product": 1, "quantity_requested": 5, "quantity_attended": 5, "created": "2026-01-10T08:00:00Z", "updated": "2026-01-10T08:00:00Z"}},
+  {"model": "solicitudes.requestdetail", "pk": 2, "fields": {"request": 1, "product": 2, "quantity_requested": 2, "quantity_attended": 2, "created": "2026-01-10T08:00:00Z", "updated": "2026-01-10T08:00:00Z"}},
+  {"model": "solicitudes.requestdetail", "pk": 3, "fields": {"request": 2, "product": 4, "quantity_requested": 3, "quantity_attended": 0, "created": "2026-01-15T09:00:00Z", "updated": "2026-01-15T09:00:00Z"}},
+  {"model": "solicitudes.requestdetail", "pk": 4, "fields": {"request": 2, "product": 7, "quantity_requested": 4, "quantity_attended": 0, "created": "2026-01-15T09:00:00Z", "updated": "2026-01-15T09:00:00Z"}},
+  {"model": "solicitudes.requestdetail", "pk": 5, "fields": {"request": 3, "product": 3, "quantity_requested": 1, "quantity_attended": 0, "created": "2026-02-01T10:00:00Z", "updated": "2026-02-01T10:00:00Z"}},
+  {"model": "solicitudes.requestdetail", "pk": 6, "fields": {"request": 3, "product": 6, "quantity_requested": 2, "quantity_attended": 0, "created": "2026-02-01T10:00:00Z", "updated": "2026-02-01T10:00:00Z"}},
+  {"model": "solicitudes.requestdetail", "pk": 7, "fields": {"request": 5, "product": 8, "quantity_requested": 3, "quantity_attended": 0, "created": "2026-03-01T08:00:00Z", "updated": "2026-03-01T08:00:00Z"}},
+
+  {"model": "ordenes.purchaseorder", "pk": 1, "fields": {"code": "OC-2026-001", "supplier": 1, "user": 1, "status": "RECEIVED", "notes": "Reposición de útiles de oficina", "created": "2026-01-05T08:00:00Z", "updated": "2026-01-05T08:00:00Z"}},
+  {"model": "ordenes.purchaseorder", "pk": 2, "fields": {"code": "OC-2026-002", "supplier": 3, "user": 1, "status": "APPROVED", "notes": "Compra de productos de limpieza", "created": "2026-02-01T08:00:00Z", "updated": "2026-02-01T08:00:00Z"}},
+  {"model": "ordenes.purchaseorder", "pk": 3, "fields": {"code": "OC-2026-003", "supplier": 2, "user": 1, "status": "DRAFT", "notes": "Equipos de cómputo nuevos", "created": "2026-03-01T08:00:00Z", "updated": "2026-03-01T08:00:00Z"}},
+  {"model": "ordenes.purchaseorder", "pk": 4, "fields": {"code": "OC-2026-004", "supplier": 1, "user": 1, "status": "CANCELLED", "notes": "Cancelada por presupuesto", "created": "2026-03-15T08:00:00Z", "updated": "2026-03-15T08:00:00Z"}},
+
+  {"model": "ordenes.purchaseorderdetail", "pk": 1, "fields": {"order": 1, "product": 1, "quantity": 20, "unit_price": "12.50", "created": "2026-01-05T08:00:00Z", "updated": "2026-01-05T08:00:00Z"}},
+  {"model": "ordenes.purchaseorderdetail", "pk": 2, "fields": {"order": 1, "product": 2, "quantity": 10, "unit_price": "8.00", "created": "2026-01-05T08:00:00Z", "updated": "2026-01-05T08:00:00Z"}},
+  {"model": "ordenes.purchaseorderdetail", "pk": 3, "fields": {"order": 1, "product": 8, "quantity": 15, "unit_price": "5.50", "created": "2026-01-05T08:00:00Z", "updated": "2026-01-05T08:00:00Z"}},
+  {"model": "ordenes.purchaseorderdetail", "pk": 4, "fields": {"order": 2, "product": 4, "quantity": 10, "unit_price": "3.80", "created": "2026-02-01T08:00:00Z", "updated": "2026-02-01T08:00:00Z"}},
+  {"model": "ordenes.purchaseorderdetail", "pk": 5, "fields": {"order": 2, "product": 7, "quantity": 12, "unit_price": "6.20", "created": "2026-02-01T08:00:00Z", "updated": "2026-02-01T08:00:00Z"}},
+  {"model": "ordenes.purchaseorderdetail", "pk": 6, "fields": {"order": 3, "product": 3, "quantity": 5, "unit_price": "85.00", "created": "2026-03-01T08:00:00Z", "updated": "2026-03-01T08:00:00Z"}},
+  {"model": "ordenes.purchaseorderdetail", "pk": 7, "fields": {"order": 3, "product": 6, "quantity": 8, "unit_price": "35.00", "created": "2026-03-01T08:00:00Z", "updated": "2026-03-01T08:00:00Z"}},
+
+  {"model": "recepcion.reception", "pk": 1, "fields": {"order": 1, "user": 3, "received_at": "2026-01-08T10:00:00Z", "status": "COMPLETED", "notes": "Recepción conforme", "created": "2026-01-08T10:00:00Z", "updated": "2026-01-08T10:00:00Z"}},
+  {"model": "recepcion.reception", "pk": 2, "fields": {"order": 2, "user": 3, "received_at": "2026-02-05T10:00:00Z", "status": "INCIDENT", "notes": "Lejía con envases dañados", "created": "2026-02-05T10:00:00Z", "updated": "2026-02-05T10:00:00Z"}},
+
+  {"model": "recepcion.receptiondetail", "pk": 1, "fields": {"reception": 1, "product": 1, "quantity_expected": 20, "quantity_received": 20, "has_incident": false, "incident_notes": "", "created": "2026-01-08T10:00:00Z", "updated": "2026-01-08T10:00:00Z"}},
+  {"model": "recepcion.receptiondetail", "pk": 2, "fields": {"reception": 1, "product": 2, "quantity_expected": 10, "quantity_received": 10, "has_incident": false, "incident_notes": "", "created": "2026-01-08T10:00:00Z", "updated": "2026-01-08T10:00:00Z"}},
+  {"model": "recepcion.receptiondetail", "pk": 3, "fields": {"reception": 1, "product": 8, "quantity_expected": 15, "quantity_received": 15, "has_incident": false, "incident_notes": "", "created": "2026-01-08T10:00:00Z", "updated": "2026-01-08T10:00:00Z"}},
+  {"model": "recepcion.receptiondetail", "pk": 4, "fields": {"reception": 2, "product": 4, "quantity_expected": 10, "quantity_received": 8, "has_incident": true, "incident_notes": "2 envases rotos al momento de recibir", "created": "2026-02-05T10:00:00Z", "updated": "2026-02-05T10:00:00Z"}},
+  {"model": "recepcion.receptiondetail", "pk": 5, "fields": {"reception": 2, "product": 7, "quantity_expected": 12, "quantity_received": 12, "has_incident": false, "incident_notes": "", "created": "2026-02-05T10:00:00Z", "updated": "2026-02-05T10:00:00Z"}},
+
+  {"model": "entregas.delivery", "pk": 1, "fields": {"code": "PEC-2026-001", "request": 1, "user": 3, "status": "DELIVERED", "delivery_at": "2026-01-12T09:00:00Z", "notes": "Entrega conforme", "created": "2026-01-12T09:00:00Z", "updated": "2026-01-12T09:00:00Z"}},
+  {"model": "entregas.delivery", "pk": 2, "fields": {"code": "PEC-2026-002", "request": 2, "user": 3, "status": "PENDING", "delivery_at": null, "notes": "", "created": "2026-01-16T09:00:00Z", "updated": "2026-01-16T09:00:00Z"}},
+
+  {"model": "entregas.deliverydetail", "pk": 1, "fields": {"delivery": 1, "product": 1, "quantity_delivered": 5, "created": "2026-01-12T09:00:00Z", "updated": "2026-01-12T09:00:00Z"}},
+  {"model": "entregas.deliverydetail", "pk": 2, "fields": {"delivery": 1, "product": 2, "quantity_delivered": 2, "created": "2026-01-12T09:00:00Z", "updated": "2026-01-12T09:00:00Z"}},
+  {"model": "entregas.deliverydetail", "pk": 3, "fields": {"delivery": 2, "product": 4, "quantity_delivered": 3, "created": "2026-01-16T09:00:00Z", "updated": "2026-01-16T09:00:00Z"}},
+
+  {"model": "inventario.movement", "pk": 1, "fields": {"product": 1, "movement_type": "IN", "quantity": 20, "reason": "Ingreso por OC-2026-001", "user": 1, "created": "2026-01-08T10:00:00Z", "updated": "2026-01-08T10:00:00Z"}},
+  {"model": "inventario.movement", "pk": 2, "fields": {"product": 2, "movement_type": "IN", "quantity": 10, "reason": "Ingreso por OC-2026-001", "user": 1, "created": "2026-01-08T10:00:00Z", "updated": "2026-01-08T10:00:00Z"}},
+  {"model": "inventario.movement", "pk": 3, "fields": {"product": 8, "movement_type": "IN", "quantity": 15, "reason": "Ingreso por OC-2026-001", "user": 1, "created": "2026-01-08T10:00:00Z", "updated": "2026-01-08T10:00:00Z"}},
+  {"model": "inventario.movement", "pk": 4, "fields": {"product": 1, "movement_type": "OUT", "quantity": 5, "reason": "Salida por PEC-2026-001", "user": 3, "created": "2026-01-12T09:00:00Z", "updated": "2026-01-12T09:00:00Z"}},
+  {"model": "inventario.movement", "pk": 5, "fields": {"product": 2, "movement_type": "OUT", "quantity": 2, "reason": "Salida por PEC-2026-001", "user": 3, "created": "2026-01-12T09:00:00Z", "updated": "2026-01-12T09:00:00Z"}},
+  {"model": "inventario.movement", "pk": 6, "fields": {"product": 4, "movement_type": "IN", "quantity": 8, "reason": "Ingreso parcial OC-2026-002 con incidencia", "user": 3, "created": "2026-02-05T10:00:00Z", "updated": "2026-02-05T10:00:00Z"}},
+  {"model": "inventario.movement", "pk": 7, "fields": {"product": 7, "movement_type": "IN", "quantity": 12, "reason": "Ingreso por OC-2026-002", "user": 3, "created": "2026-02-05T10:00:00Z", "updated": "2026-02-05T10:00:00Z"}}
+]
