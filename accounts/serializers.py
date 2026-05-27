@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
-from .models import CustomUser
+from .models import CustomUser, Modulo, RolModulo
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -28,14 +28,26 @@ class UserSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['id', 'username', 'email', 'role', 'is_active']
 
+class ModuloSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Modulo
+        fields = ['id', 'nombre', 'url', 'icono']
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
     def get_token(cls, user):
         token = super().get_token(user)
 
+        modulos = Modulo.objects.filter(
+            rol_modulos__rol=user.role,
+            rol_modulos__activo=True,
+            activo=True
+        )
+
         # Agregar información personalizada al token
         token['role'] = user.role
+        token['username'] = user.username
+        token['modulos'] = ModuloSerializer(modulos, many=True).data
 
         return token
 

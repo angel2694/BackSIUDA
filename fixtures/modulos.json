@@ -1,0 +1,31 @@
+[
+  {"model": "accounts.modulo", "pk": 1, "fields": {"nombre": "Dashboard",   "url": "/app/dashboard",   "icono": "bi-house",     "activo": true}},
+  {"model": "accounts.modulo", "pk": 2, "fields": {"nombre": "Solicitudes", "url": "/app/solicitudes", "icono": "bi-clipboard", "activo": true}},
+  {"model": "accounts.modulo", "pk": 3, "fields": {"nombre": "Inventario",  "url": "/app/inventario",  "icono": "bi-box-seam",  "activo": true}},
+  {"model": "accounts.modulo", "pk": 4, "fields": {"nombre": "Órdenes",     "url": "/app/ordenes",     "icono": "bi-cart",      "activo": true}},
+  {"model": "accounts.modulo", "pk": 5, "fields": {"nombre": "Recepción",   "url": "/app/recepcion",   "icono": "bi-truck",     "activo": true}},
+  {"model": "accounts.modulo", "pk": 6, "fields": {"nombre": "Usuarios",    "url": "/app/usuarios",    "icono": "bi-people",    "activo": true}},
+
+  {"model": "accounts.rolmodulo", "pk": 1,  "fields": {"rol": "admin",      "modulo": 1, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 2,  "fields": {"rol": "admin",      "modulo": 2, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 3,  "fields": {"rol": "admin",      "modulo": 3, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 4,  "fields": {"rol": "admin",      "modulo": 4, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 5,  "fields": {"rol": "admin",      "modulo": 5, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 6,  "fields": {"rol": "admin",      "modulo": 6, "activo": true}},
+
+  {"model": "accounts.rolmodulo", "pk": 7,  "fields": {"rol": "almacen",    "modulo": 1, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 8,  "fields": {"rol": "almacen",    "modulo": 3, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 9,  "fields": {"rol": "almacen",    "modulo": 5, "activo": true}},
+
+  {"model": "accounts.rolmodulo", "pk": 10, "fields": {"rol": "inventario", "modulo": 1, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 11, "fields": {"rol": "inventario", "modulo": 3, "activo": true}},
+
+  {"model": "accounts.rolmodulo", "pk": 12, "fields": {"rol": "user",       "modulo": 1, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 13, "fields": {"rol": "user",       "modulo": 2, "activo": true}},
+
+  {"model": "accounts.rolmodulo", "pk": 14, "fields": {"rol": "cliente",    "modulo": 1, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 15, "fields": {"rol": "cliente",    "modulo": 2, "activo": true}},
+
+  {"model": "accounts.rolmodulo", "pk": 16, "fields": {"rol": "proveedor",  "modulo": 1, "activo": true}},
+  {"model": "accounts.rolmodulo", "pk": 17, "fields": {"rol": "proveedor",  "modulo": 4, "activo": true}}
+]
