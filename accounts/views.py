@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
 
-from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer
+from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer
 from .models import CustomUser
 
 
@@ -57,7 +57,6 @@ class AssignRoleAPIView(APIView):
 
         return Response({'detail': f'Rol actualizado a {user.role}', 'user_id': user.id, 'role': user.role})
 
-
 class UserListAPIView(APIView):
     permission_classes = [IsAuthenticated, IsAdmin]
 
@@ -66,11 +65,23 @@ class UserListAPIView(APIView):
         serializer = UserSerializer(users, many=True)
         return Response(serializer.data)
 
+class RegisterAPIView(APIView):
+    def post(self, request):
+        serializer = RegisterSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        user = serializer.save()
+        return Response({
+            'detail': 'Usuario registrado exitosamente.',
+            'user': {
+                'id': user.id,
+                'username': user.username,
+                'email': user.email,
+                'role': user.role,
+            }
+        }, status=status.HTTP_201_CREATED)
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def test_protected(request):
     return Response({"message": "OK"})
-
-class RegisterAPIView(APIView):
-    pass
