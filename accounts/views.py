@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
 
-from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer
+from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer, ProfileSerializer
 from .models import CustomUser
 
 
@@ -85,3 +85,10 @@ class RegisterAPIView(APIView):
 @permission_classes([IsAuthenticated])
 def test_protected(request):
     return Response({"message": "OK"})
+
+class ProfileAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        serializer = ProfileSerializer(request.user)
+        return Response(serializer.data)
