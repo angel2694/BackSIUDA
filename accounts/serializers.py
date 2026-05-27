@@ -78,3 +78,13 @@ class ProfileSerializer(serializers.ModelSerializer):
         model = CustomUser
         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role']
         read_only_fields = ['id', 'username', 'role']
+
+class ChangePasswordSerializer(serializers.Serializer):
+    password_actual = serializers.CharField(write_only=True)
+    password_nueva = serializers.CharField(write_only=True, min_length=6)
+    password_nueva2 = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        if data['password_nueva'] != data['password_nueva2']:
+            raise serializers.ValidationError({'password_nueva2': 'Las contraseñas no coinciden.'})
+        return data

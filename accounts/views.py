@@ -5,7 +5,7 @@ from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
 
-from .serializers import AssignRoleSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer, ProfileSerializer
+from .serializers import AssignRoleSerializer, ChangePasswordSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer, ProfileSerializer
 from .models import CustomUser
 
 
@@ -92,3 +92,19 @@ class ProfileAPIView(APIView):
     def get(self, request):
         serializer = ProfileSerializer(request.user)
         return Response(serializer.data)
+
+class ChangePasswordAPIView(APIView):
+    permission_classes = [IsAuthenticated]
+
+    def patch(self, request):
+        serializer = ChangePasswordSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        user = request.user
+        if not user.check_password(serializer.validated_data['password_actual']):
+            return Response({'detail': 'Contraseña actual incorrecta.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(serializer.validated_data['password_nueva'])
+        user.save()
+        return Response({'detail': 'Contraseña actualizada correctamente.'})
