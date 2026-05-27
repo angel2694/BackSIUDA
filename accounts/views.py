@@ -15,7 +15,7 @@ class IsAdmin(BasePermission):
 
 # Create your views here.
 class LoginAPIView(APIView):
-    
+
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
 
@@ -71,3 +71,6 @@ class UserListAPIView(APIView):
 @permission_classes([IsAuthenticated])
 def test_protected(request):
     return Response({"message": "OK"})
+
+class RegisterAPIView(APIView):
+    pass

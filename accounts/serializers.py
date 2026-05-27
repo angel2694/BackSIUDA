@@ -14,9 +14,9 @@ class LoginSerializer(serializers.Serializer):
         if user:
             data['user'] = user
             return data
- 
+
         raise serializers.ValidationError("Credenciales inválidas")
-    
+
 class AssignRoleSerializer(serializers.Serializer):
     role = serializers.ChoiceField(choices=[
         'admin', 'user', 'guest', 'almacen', 'inventario', 'cliente', 'proveedor'
@@ -38,4 +38,6 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
         token['role'] = user.role
 
         return token
-    
+
+class RegisterAPIView(serializers.Serializer):
+    pass
