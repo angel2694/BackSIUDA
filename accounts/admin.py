@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import CustomUser
+from .models import CustomUser, Modulo, RolModulo
 
 @admin.register(CustomUser)
 class CustomUserAdmin(UserAdmin):
@@ -10,3 +10,14 @@ class CustomUserAdmin(UserAdmin):
     fieldsets = UserAdmin.fieldsets + (
         ('Rol', {'fields': ('role',)}),
     )
+
+@admin.register(Modulo)
+class ModuloAdmin(admin.ModelAdmin):
+    list_display = ('id', 'nombre', 'url', 'icono', 'activo')
+    list_editable = ('activo',)
+
+@admin.register(RolModulo)
+class RolModuloAdmin(admin.ModelAdmin):
+    list_display = ('rol', 'modulo', 'activo')
+    list_filter = ('rol', 'activo')
+    list_editable = ('activo',)
