@@ -2,6 +2,12 @@ from rest_framework import serializers
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from .models import CustomUser, Modulo, RolModulo
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import send_mail
+from django.conf import settings
+
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -82,6 +88,26 @@ class ProfileSerializer(serializers.ModelSerializer):
 class ChangePasswordSerializer(serializers.Serializer):
     password_actual = serializers.CharField(write_only=True)
     password_nueva = serializers.CharField(write_only=True, min_length=6)
+    password_nueva2 = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        if data['password_nueva'] != data['password_nueva2']:
+            raise serializers.ValidationError({'password_nueva2': 'Las contraseñas no coinciden.'})
+        return data
+    
+class PasswordResetRequestSerializer(serializers.Serializer):
+    email = serializers.EmailField()
+
+    def validate_email(self, value):
+        if not CustomUser.objects.filter(email=value).exists():
+            raise serializers.ValidationError('No existe una cuenta con ese email.')
+        return value
+
+
+class PasswordResetConfirmSerializer(serializers.Serializer):
+    uid   = serializers.CharField()
+    token = serializers.CharField()
+    password_nueva  = serializers.CharField(write_only=True, min_length=6)
     password_nueva2 = serializers.CharField(write_only=True)
 
     def validate(self, data):

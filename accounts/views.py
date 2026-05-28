@@ -8,6 +8,11 @@ from rest_framework.decorators import api_view, permission_classes
 from .serializers import AssignRoleSerializer, ChangePasswordSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer, ProfileSerializer
 from .models import CustomUser
 
+from django.contrib.auth.tokens import default_token_generator
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.utils.encoding import force_bytes, force_str
+from django.core.mail import send_mail
+from django.conf import settings
 
 class IsAdmin(BasePermission):
     def has_permission(self, request, view):
@@ -108,3 +113,49 @@ class ChangePasswordAPIView(APIView):
         user.set_password(serializer.validated_data['password_nueva'])
         user.save()
         return Response({'detail': 'Contraseña actualizada correctamente.'})
+    
+class PasswordResetRequestView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = PasswordResetRequestSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        email = serializer.validated_data['email']
+        user  = CustomUser.objects.get(email=email)
+        uid   = urlsafe_base64_encode(force_bytes(user.pk))
+        token = default_token_generator.make_token(user)
+
+        reset_link = f"{settings.FRONTEND_URL}/reset-password?uid={uid}&token={token}"
+
+        send_mail(
+            subject='Recuperacion de contrasena — SIUDA',
+            message=f'Hola {user.username},\n\nHaz click en el siguiente enlace para restablecer tu contrasena:\n\n{reset_link}\n\nSi no solicitaste esto, ignora este mensaje.',
+            from_email='noreply@siuda.com',
+            recipient_list=[email],
+        )
+
+        return Response({'detail': 'Se envio el enlace de recuperacion al correo.'})
+
+
+class PasswordResetConfirmView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self, request):
+        serializer = PasswordResetConfirmSerializer(data=request.data)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        try:
+            uid  = force_str(urlsafe_base64_decode(serializer.validated_data['uid']))
+            user = CustomUser.objects.get(pk=uid)
+        except (TypeError, ValueError, CustomUser.DoesNotExist):
+            return Response({'detail': 'Enlace invalido.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        if not default_token_generator.check_token(user, serializer.validated_data['token']):
+            return Response({'detail': 'El enlace expiro o ya fue usado.'}, status=status.HTTP_400_BAD_REQUEST)
+
+        user.set_password(serializer.validated_data['password_nueva'])
+        user.save()
+        return Response({'detail': 'Contrasena restablecida correctamente.'})
