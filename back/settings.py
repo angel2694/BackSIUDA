@@ -157,3 +157,7 @@ SIMPLE_JWT = {
     'ACCESS_TOKEN_LIFETIME': timedelta(hours=8),
     'REFRESH_TOKEN_LIFETIME': timedelta(days=1),
 }
+
+# Email — consola para desarrollo (imprime en terminal, no envía nada)
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+FRONTEND_URL = 'http://localhost:4200'  # cambiar por IP del VPS en produccion
