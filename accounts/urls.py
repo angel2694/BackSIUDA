@@ -1,4 +1,4 @@
-from .views import AssignRoleAPIView, LoginAPIView, ProfileAPIView, UserListAPIView, test_protected, RegisterAPIView, ChangePasswordAPIView, PasswordResetRequestAPIView, PasswordResetConfirmAPIView
+from .views import AssignRoleAPIView, LoginAPIView, ProfileAPIView, UserListAPIView, test_protected, RegisterAPIView, ChangePasswordAPIView, PasswordResetRequestView, PasswordResetConfirmView
 from django.urls import path
 
 urlpatterns = [
@@ -9,6 +9,6 @@ urlpatterns = [
     path('register/', RegisterAPIView.as_view(), name='register'),
     path('profile/', ProfileAPIView.as_view(), name='profile'),
     path('profile/password/', ChangePasswordAPIView.as_view(), name='change-password'),
-    path('password-reset/', PasswordResetRequestAPIView.as_view(), name='password-reset-request'),
-    path('password-reset/confirm/', PasswordResetConfirmAPIView.as_view(), name='password-reset-confirm'),
+    path('password-reset/', PasswordResetRequestView.as_view(), name='password-reset-request'),
+    path('password-reset/confirm/', PasswordResetConfirmView.as_view(), name='password-reset-confirm'),
 ]
