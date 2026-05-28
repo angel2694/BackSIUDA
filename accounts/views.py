@@ -1,11 +1,11 @@
 from rest_framework import status
-from rest_framework.permissions import BasePermission, IsAuthenticated
+from rest_framework.permissions import BasePermission, IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
 from rest_framework.decorators import api_view, permission_classes
 
-from .serializers import AssignRoleSerializer, ChangePasswordSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer, ProfileSerializer
+from .serializers import AssignRoleSerializer, ChangePasswordSerializer, CustomTokenObtainPairSerializer, LoginSerializer, UserSerializer, RegisterSerializer, ProfileSerializer, PasswordResetRequestSerializer, PasswordResetConfirmSerializer
 from .models import CustomUser
 
 from django.contrib.auth.tokens import default_token_generator
