@@ -130,10 +130,11 @@ class PasswordResetRequestView(APIView):
         reset_link = f"{settings.FRONTEND_URL}/reset-password?uid={uid}&token={token}"
 
         send_mail(
-            subject='Recuperacion de contrasena — SIUDA',
+            subject='Recuperacion de contrasena SIUDA',
             message=f'Hola {user.username},\n\nHaz click en el siguiente enlace para restablecer tu contrasena:\n\n{reset_link}\n\nSi no solicitaste esto, ignora este mensaje.',
             from_email='noreply@siuda.com',
             recipient_list=[email],
+            html_message=f'<p>Hola <b>{user.username}</b>,</p><p>Haz click aqui para restablecer tu contrasena:</p><p><a href="{reset_link}">{reset_link}</a></p><p>Si no solicitaste esto, ignora este mensaje.</p>'
         )
 
         return Response({'detail': 'Se envio el enlace de recuperacion al correo.'})
