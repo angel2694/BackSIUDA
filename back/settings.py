@@ -160,4 +160,4 @@ SIMPLE_JWT = {
 
 # Email — consola para desarrollo (imprime en terminal, no envía nada)
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
-FRONTEND_URL = 'http://localhost:4200'  # cambiar por IP del VPS en produccion
+FRONTEND_URL = config('FRONTEND_URL', default='http://localhost:4200')  # cambiar por IP del VPS en produccion
