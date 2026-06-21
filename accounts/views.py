@@ -13,10 +13,7 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import send_mail
 from django.conf import settings
-
-class IsAdmin(BasePermission):
-    def has_permission(self, request, view):
-        return bool(request.user and request.user.is_authenticated and request.user.role == 'admin')
+from .permissions import IsAdmin
 
 # Create your views here.
 class LoginAPIView(APIView):
@@ -29,7 +26,7 @@ class LoginAPIView(APIView):
                 {'detail': 'Credenciales inválidas'},
                 status=status.HTTP_401_UNAUTHORIZED
             )
-        # serializer.is_valid(raise_exception=True)
+        
         user = serializer.validated_data['user']
         refresh = CustomTokenObtainPairSerializer.get_token(user)
 
@@ -44,6 +41,14 @@ class LoginAPIView(APIView):
             'access': str(refresh.access_token)
         })
 
+class UserListAPIView(APIView):
+    permission_classes = [IsAuthenticated, IsAdmin]
+
+    def get(self, request):
+        users = CustomUser.objects.all().order_by('id')
+        serializer = UserSerializer(users, many=True)
+        return Response(serializer.data)
+
 class AssignRoleAPIView(APIView):
     permission_classes = [IsAuthenticated, IsAdmin]
 
@@ -54,21 +59,14 @@ class AssignRoleAPIView(APIView):
             return Response({'detail': 'Usuario no encontrado'}, status=status.HTTP_404_NOT_FOUND)
 
         serializer = AssignRoleSerializer(data=request.data)
+
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
+        # asigna el rol al usuario desde el request
         user.role = serializer.validated_data['role']
         user.save()
 
         return Response({'detail': f'Rol actualizado a {user.role}', 'user_id': user.id, 'role': user.role})
-
-class UserListAPIView(APIView):
-    permission_classes = [IsAuthenticated, IsAdmin]
-
-    def get(self, request):
-        users = CustomUser.objects.all().order_by('id')
-        serializer = UserSerializer(users, many=True)
-        return Response(serializer.data)
 
 class RegisterAPIView(APIView):
     def post(self, request):
@@ -138,7 +136,6 @@ class PasswordResetRequestView(APIView):
         )
 
         return Response({'detail': 'Se envio el enlace de recuperacion al correo.'})
-
 
 class PasswordResetConfirmView(APIView):
     permission_classes = [AllowAny]

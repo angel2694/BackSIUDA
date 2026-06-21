@@ -1,8 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
-class CustomUser(AbstractUser):
-    ROLE_CHOICES = (
+ROLE_CHOICES = (
         ('admin', 'Admin'),
         ('user', 'User'),
         ('guest', 'Guest'),
@@ -10,7 +9,9 @@ class CustomUser(AbstractUser):
         ('inventario', 'Inventario'),
         ('cliente', 'Cliente'),
         ('proveedor', 'Proveedor'),
-    )
+)
+class CustomUser(AbstractUser):
+    
     role = models.CharField(max_length=20, choices=ROLE_CHOICES, default='user')
     def __str__(self):
         return self.username
@@ -20,6 +21,8 @@ class Modulo(models.Model):
     url = models.CharField(max_length=200)
     icono = models.CharField(max_length=50, blank=True, default='')
     activo = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         ordering = ['id']
@@ -27,11 +30,12 @@ class Modulo(models.Model):
     def __str__(self):
         return self.nombre
 
-
 class RolModulo(models.Model):
-    rol = models.CharField(max_length=20, choices=CustomUser.ROLE_CHOICES)
-    modulo = models.ForeignKey(Modulo, on_delete=models.CASCADE, related_name='rol_modulos')
+    rol = models.CharField(max_length=20, choices=ROLE_CHOICES)
+    modulo = models.ForeignKey(Modulo, on_delete=models.PROTECT, related_name='rol_modulos')
     activo = models.BooleanField(default=True)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
 
     class Meta:
         unique_together = ('rol', 'modulo')

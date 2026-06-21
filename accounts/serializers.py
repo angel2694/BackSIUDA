@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import CustomUser, Modulo, RolModulo
+from .models import CustomUser, Modulo, RolModulo, ROLE_CHOICES
 from django.contrib.auth import authenticate
 from rest_framework_simplejwt.serializers import TokenObtainPairSerializer
 from django.contrib.auth.tokens import default_token_generator
@@ -7,7 +7,6 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.utils.encoding import force_bytes, force_str
 from django.core.mail import send_mail
 from django.conf import settings
-
 
 class LoginSerializer(serializers.Serializer):
     username = serializers.CharField()
@@ -23,16 +22,13 @@ class LoginSerializer(serializers.Serializer):
 
         raise serializers.ValidationError("Credenciales inválidas")
 
-class AssignRoleSerializer(serializers.Serializer):
-    role = serializers.ChoiceField(choices=[
-        'admin', 'user', 'guest', 'almacen', 'inventario', 'cliente', 'proveedor'
-    ])
-
-
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = CustomUser
         fields = ['id', 'username', 'email', 'role', 'is_active']
+
+class AssignRoleSerializer(serializers.Serializer):
+    role = serializers.ChoiceField(choices=ROLE_CHOICES)
 
 class ModuloSerializer(serializers.ModelSerializer):
     class Meta:
@@ -85,6 +81,7 @@ class ProfileSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role']
         read_only_fields = ['id', 'username', 'role']
 
+#revisar con login 
 class ChangePasswordSerializer(serializers.Serializer):
     password_actual = serializers.CharField(write_only=True)
     password_nueva = serializers.CharField(write_only=True, min_length=6)
@@ -102,7 +99,6 @@ class PasswordResetRequestSerializer(serializers.Serializer):
         if not CustomUser.objects.filter(email=value).exists():
             raise serializers.ValidationError('No existe una cuenta con ese email.')
         return value
-
 
 class PasswordResetConfirmSerializer(serializers.Serializer):
     uid   = serializers.CharField()
