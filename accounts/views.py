@@ -1,5 +1,5 @@
 from rest_framework import status
-from rest_framework.permissions import BasePermission, IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework_simplejwt.tokens import RefreshToken
@@ -71,9 +71,12 @@ class AssignRoleAPIView(APIView):
 class RegisterAPIView(APIView):
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
+
         if not serializer.is_valid():
             return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        
         user = serializer.save()
+        
         return Response({
             'detail': 'Usuario registrado exitosamente.',
             'user': {
@@ -83,11 +86,6 @@ class RegisterAPIView(APIView):
                 'role': user.role,
             }
         }, status=status.HTTP_201_CREATED)
-
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def test_protected(request):
-    return Response({"message": "OK"})
 
 class ProfileAPIView(APIView):
     permission_classes = [IsAuthenticated]

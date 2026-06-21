@@ -30,6 +30,44 @@ class UserSerializer(serializers.ModelSerializer):
 class AssignRoleSerializer(serializers.Serializer):
     role = serializers.ChoiceField(choices=ROLE_CHOICES)
 
+class RegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(write_only=True, min_length=6)
+    password2 = serializers.CharField(write_only=True)
+
+    class Meta:
+        model = CustomUser
+        fields = ['username', 'email', 'password', 'password2']
+
+    def validate(self, data):
+        if data['password'] != data['password2']:
+            raise serializers.ValidationError({'password2': 'Las contraseñas no coinciden.'})
+        return data
+
+    def create(self, validated_data):
+        validated_data.pop('password2')
+        password = validated_data.pop('password')
+        user = CustomUser(**validated_data)
+        user.set_password(password)
+        user.role = 'guest'  # Asigna el rol 'guest' por defecto
+        user.save()
+        return user
+    
+class ProfileSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = CustomUser
+        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role']
+        read_only_fields = ['id', 'username', 'role']
+
+class ChangePasswordSerializer(serializers.Serializer):
+    password_actual = serializers.CharField(write_only=True)
+    password_nueva = serializers.CharField(write_only=True, min_length=6)
+    password_nueva2 = serializers.CharField(write_only=True)
+
+    def validate(self, data):
+        if data['password_nueva'] != data['password_nueva2']:
+            raise serializers.ValidationError({'password_nueva2': 'Las contraseñas no coinciden.'})
+        return data
+    
 class ModuloSerializer(serializers.ModelSerializer):
     class Meta:
         model = Modulo
@@ -53,45 +91,7 @@ class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
 
         return token
 
-class RegisterSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(write_only=True, min_length=6)
-    password2 = serializers.CharField(write_only=True)
-
-    class Meta:
-        model = CustomUser
-        fields = ['username', 'email', 'password', 'password2']
-
-    def validate(self, data):
-        if data['password'] != data['password2']:
-            raise serializers.ValidationError({'password2': 'Las contraseñas no coinciden.'})
-        return data
-
-    def create(self, validated_data):
-        validated_data.pop('password2')
-        password = validated_data.pop('password')
-        user = CustomUser(**validated_data)
-        user.set_password(password)
-        user.role = 'user'
-        user.save()
-        return user
-
-class ProfileSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = CustomUser
-        fields = ['id', 'username', 'email', 'first_name', 'last_name', 'role']
-        read_only_fields = ['id', 'username', 'role']
-
 #revisar con login 
-class ChangePasswordSerializer(serializers.Serializer):
-    password_actual = serializers.CharField(write_only=True)
-    password_nueva = serializers.CharField(write_only=True, min_length=6)
-    password_nueva2 = serializers.CharField(write_only=True)
-
-    def validate(self, data):
-        if data['password_nueva'] != data['password_nueva2']:
-            raise serializers.ValidationError({'password_nueva2': 'Las contraseñas no coinciden.'})
-        return data
-    
 class PasswordResetRequestSerializer(serializers.Serializer):
     email = serializers.EmailField()
 
