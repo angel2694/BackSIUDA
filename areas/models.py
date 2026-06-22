@@ -11,7 +11,7 @@ class Area(models.Model):
         return self.name
 
     class Meta:
-        verbose_name = 'Área'
-        verbose_name_plural = 'Áreas'
+        verbose_name = 'Area'
+        verbose_name_plural = 'Areas'
 
 
