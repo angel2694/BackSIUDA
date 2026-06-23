@@ -39,4 +39,4 @@ tzdata==2026.2
 uritemplate==4.2.0
 Werkzeug==3.1.8
 gunicorn==26.0.0
-python manage.py collectstatic
+whitenoise==6.12.0
