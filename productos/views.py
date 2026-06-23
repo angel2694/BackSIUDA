@@ -1,6 +1,6 @@
 from rest_framework.viewsets import ModelViewSet
-from .models import Category, UnitMeasure
-from .serializers import CategorySerializer, UnitMeasureSerializer
+from .models import Category, UnitMeasure, Product
+from .serializers import CategorySerializer, UnitMeasureSerializer, ProductSerializer
 from accounts.permissions import IsAdmin
 from rest_framework.permissions import IsAuthenticated
 class CategoryViewSet(ModelViewSet):
@@ -12,3 +12,8 @@ class UnitMeasureViewSet(ModelViewSet):
     queryset = UnitMeasure.objects.all().order_by('id')
     serializer_class = UnitMeasureSerializer
     permission_classes = [IsAuthenticated, IsAdmin]  
+
+class ProductViewSet(ModelViewSet):
+    queryset = Product.objects.all().order_by('id')
+    serializer_class = ProductSerializer
+    permission_classes = [IsAuthenticated, IsAdmin]
