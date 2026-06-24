@@ -94,6 +94,13 @@ class ProfileAPIView(APIView):
         serializer = ProfileSerializer(request.user)
         return Response(serializer.data)
 
+    def patch(self, request):
+        serializer = ProfileSerializer(request.user, data=request.data, partial=True)
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        serializer.save()
+        return Response(serializer.data)
+
 class ChangePasswordAPIView(APIView):
     permission_classes = [IsAuthenticated]
 
