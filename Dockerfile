@@ -13,4 +13,4 @@ COPY . .
 
 EXPOSE 8000
 
-CMD python manage.py migrate && python manage.py loaddata fixtures/modulos.json && gunicorn back.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 2 --timeout 60
+CMD python manage.py migrate && python manage.py loaddata fixtures/modulos.json && python manage.py collectstatic --noinput && gunicorn back.wsgi:application --bind 0.0.0.0:$PORT --workers 2 --threads 2 --timeout 60
