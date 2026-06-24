@@ -271,8 +271,8 @@
   }
 },
 {
-  "model": "accounts.rolmodulo", 
-  "pk": 18, 
+  "model": "accounts.rolmodulo",
+  "pk": 18,
   "fields": {
     "rol": "admin",
     "modulo": 7,
@@ -280,6 +280,96 @@
     "created": "2026-06-21T20:04:00.898Z",
     "updated": "2026-06-21T20:04:00.908Z"
   }
+},
+{
+  "model": "accounts.modulo",
+  "pk": 8,
+  "fields": {
+    "nombre": "Categorías",
+    "url": "/app/categorias",
+    "icono": "bi-tags",
+    "activo": true,
+    "created": "2026-06-21T20:04:00.884Z",
+    "updated": "2026-06-21T20:04:00.884Z"
+  }
+},
+{
+  "model": "accounts.modulo",
+  "pk": 9,
+  "fields": {
+    "nombre": "Unidades",
+    "url": "/app/unidades",
+    "icono": "bi-rulers",
+    "activo": true,
+    "created": "2026-06-21T20:04:00.884Z",
+    "updated": "2026-06-21T20:04:00.884Z"
+  }
+},
+{
+  "model": "accounts.modulo",
+  "pk": 10,
+  "fields": {
+    "nombre": "Proveedores",
+    "url": "/app/proveedores",
+    "icono": "bi-shop",
+    "activo": true,
+    "created": "2026-06-21T20:04:00.884Z",
+    "updated": "2026-06-21T20:04:00.884Z"
+  }
+},
+{
+  "model": "accounts.modulo",
+  "pk": 11,
+  "fields": {
+    "nombre": "Productos",
+    "url": "/app/productos",
+    "icono": "bi-box",
+    "activo": true,
+    "created": "2026-06-21T20:04:00.884Z",
+    "updated": "2026-06-21T20:04:00.884Z"
+  }
+},
+{
+  "model": "accounts.modulo",
+  "pk": 12,
+  "fields": {
+    "nombre": "Proformas",
+    "url": "/app/proformas",
+    "icono": "bi-file-earmark-text",
+    "activo": true,
+    "created": "2026-06-21T20:04:00.884Z",
+    "updated": "2026-06-21T20:04:00.884Z"
+  }
+},
+{
+  "model": "accounts.rolmodulo",
+  "pk": 19,
+  "fields": { "rol": "admin", "modulo": 8, "activo": true,
+    "created": "2026-06-21T20:04:00.898Z", "updated": "2026-06-21T20:04:00.898Z" }
+},
+{
+  "model": "accounts.rolmodulo",
+  "pk": 20,
+  "fields": { "rol": "admin", "modulo": 9, "activo": true,
+    "created": "2026-06-21T20:04:00.898Z", "updated": "2026-06-21T20:04:00.898Z" }
+},
+{
+  "model": "accounts.rolmodulo",
+  "pk": 21,
+  "fields": { "rol": "admin", "modulo": 10, "activo": true,
+    "created": "2026-06-21T20:04:00.898Z", "updated": "2026-06-21T20:04:00.898Z" }
+},
+{
+  "model": "accounts.rolmodulo",
+  "pk": 22,
+  "fields": { "rol": "admin", "modulo": 11, "activo": true,
+    "created": "2026-06-21T20:04:00.898Z", "updated": "2026-06-21T20:04:00.898Z" }
+},
+{
+  "model": "accounts.rolmodulo",
+  "pk": 23,
+  "fields": { "rol": "admin", "modulo": 12, "activo": true,
+    "created": "2026-06-21T20:04:00.898Z", "updated": "2026-06-21T20:04:00.898Z" }
 }
 
 ]
