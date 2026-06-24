@@ -16,10 +16,16 @@ class CustomUser(AbstractUser):
     def __str__(self):
         return self.username
 
+GRUPO_CHOICES = (
+    ('principal', 'Principal'),
+    ('administracion', 'Administración'),
+)
+
 class Modulo(models.Model):
     nombre = models.CharField(max_length=100)
     url = models.CharField(max_length=200)
     icono = models.CharField(max_length=50, blank=True, default='')
+    grupo = models.CharField(max_length=20, choices=GRUPO_CHOICES, default='principal')
     activo = models.BooleanField(default=True)
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(auto_now=True)

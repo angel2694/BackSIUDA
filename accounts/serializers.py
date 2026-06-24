@@ -71,7 +71,7 @@ class ChangePasswordSerializer(serializers.Serializer):
 class ModuloSerializer(serializers.ModelSerializer):
     class Meta:
         model = Modulo
-        fields = ['id', 'nombre', 'url', 'icono']
+        fields = ['id', 'nombre', 'url', 'icono', 'grupo']
 
 class CustomTokenObtainPairSerializer(TokenObtainPairSerializer):
     @classmethod
